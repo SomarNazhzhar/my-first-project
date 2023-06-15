@@ -74,11 +74,11 @@ public class Bestand {
         }
     }
 
-    public void sellArtikel(Lager mainLager) {
+    public static void sellArtikel(Lager mainLager) {
         Kunde.orderBestand(mainLager);
     }
 
-    public void reciveBestand(Lager mainLager) {
+    public static void reciveBestand(Lager mainLager) {
        Lieferant.addArtikelsFromLieferant(mainLager);
     }
 

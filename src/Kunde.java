@@ -41,7 +41,7 @@ public class Kunde implements CRUDoperations<Kunde>{
         String artikelNumber = input.next();
         input.nextLine();
 
-        System.out.println("choose Lager Name:");
+        System.out.println("choose Lager Name:(The name of the orginal lager is (mylager)");
         String lagerName = input.nextLine();
 
         Lager selectedLager = Lager.findLager(lagerName, mainLager);
@@ -59,7 +59,7 @@ public class Kunde implements CRUDoperations<Kunde>{
             if (selectedArtikel != null) {
                 System.out.println("Artikel Number: " + selectedArtikel.getArtikelNumber());
                 System.out.println("Lager name: " + selectedLager.getLagerName());
-                System.out.println("Buy?");
+                System.out.println("Buy? (true/ false )");
                 boolean kauf = input.nextBoolean();
                 if (kauf) {
                     Kunde customer = new Kunde(customerNumber, customerName);

@@ -82,16 +82,16 @@ public class Main {
                         Lager.transferArtikel(lager);
                         break;
                     case 6:
-                        Kunde.orderBestand(lager);
+                        Bestand.sellArtikel(lager);
                         break;
                     case 7:
                         System.out.println("Artikels in All Lagers:");
                         lager.printAllArtikels();
                         break;
                     case 8:
-                        Lieferant.addArtikelsFromLieferant(lager);
+                        Bestand.reciveBestand(lager);
                     break;
-                    case 9:
+                    case 9://read
                         try {
                             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
                             DocumentBuilder builder = factory.newDocumentBuilder();
