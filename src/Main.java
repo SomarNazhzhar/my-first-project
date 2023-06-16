@@ -1,4 +1,6 @@
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import javax.swing.*;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -30,31 +32,13 @@ public class Main {
                 System.out.println("10. creat xml file");
                 System.out.println("11. read File and insert data");
 
-
-
-
                 input = new Scanner(System.in);
                 choice = input.nextInt();
 
                 switch (choice) {
                     case 1:
-                        // إنشاء بضاعة جديدة
-                        System.out.println("insert artikel number:");
-                        String a_number = input.next();
-                        System.out.println("insert a description:");
-                        String a_description = input.next();
-                        System.out.println("insert an Amount:");
-                        int amount = input.nextInt();
-                        for (int i = 0; i < amount; i++) {
-                            System.out.print("["+ (i+ 1) + " :");
-                            Artikel artikel1 = new Artikel(a_number, a_description);
-                            lager.create(artikel1);
-                            System.out.println(artikel1.toString());
-                        }
-                        System.out.println("Artikel nummer : "+a_number+">>>"+"["+amount+"]"+"stk");
-                        System.out.println("successfully");
-                        System.out.println("---------------------------------");
-                        break;
+                       Lager.checkBestandAndAddArtikels(lager,input);
+                       break;
 
                     case 2:
                         System.out.println("insert artikel number:");
@@ -158,8 +142,6 @@ public class Main {
                             e.printStackTrace();
                         }
                         break;
-
-
                 }
 
             } catch (Exception e) {

@@ -1,4 +1,5 @@
 import java.io.File;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -17,6 +18,7 @@ public class Lager implements CRUDoperations<Artikel> {
     private List<Lager> subLagers;
     private List<Lieferant> lieferants;
     private Lieferant currentLieferant;
+    private int amount;
 
 
     public Lager(String lagerName) {
@@ -332,6 +334,57 @@ public class Lager implements CRUDoperations<Artikel> {
     public List<Lager> getSubLagers() {
         return subLagers;
     }
+
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////
+    public static void checkBestandAndAddArtikels(Lager lager, Scanner input) {
+
+        System.out.println("insert artikel number:");
+        String a_number = input.next();
+        System.out.println("insert a description:");
+        String a_description = input.next();
+        System.out.println("insert an Amount:");
+        int amount = input.nextInt();
+        int x = lager.artikels.size() + amount;
+        if (x > 100){
+            System.out.println("lager ist full !!! du kannst jetzt nur :"+" "+ (100 -lager.artikels.size()) + " stock einfugen");
+            System.out.println("möschten sie die mänge ändern ? true/ false");
+            boolean choice = input.nextBoolean();
+            if (choice == true){
+                System.out.println("lager size ???" + "jetzt: "+ lager.artikels.size() + "/ du brauchst :"+
+                        (lager.artikels.size()+ amount) );
+                int lagerSize = input.nextInt();
+                int lagerAfterEdit = lagerSize - lager.artikels.size();
+                for (int i = 0; i <lagerAfterEdit; i++) {
+                    Artikel artikel1 = new Artikel(a_number, a_description);
+                    lager.create(artikel1);
+                    System.out.println(artikel1.toString());
+                }
+
+            }else {
+                System.out.println("try another time");
+            }
+        } else {
+            for (int i = 0; i < amount; i++) {
+                System.out.print("[" + (i + 1) + " :");
+                Artikel artikel1 = new Artikel(a_number, a_description);
+                lager.create(artikel1);
+                System.out.println(artikel1.toString());
+            }
+            System.out.println("Artikel nummer : " + a_number + ">>>[" + amount + "]" + "stk");
+            System.out.println("successfully");
+            System.out.println(x);
+            System.out.println("---------------------------------");
+        }
+    }
+
+
+
+
+
+
+
     @Override
     public void create(Artikel item) {
         artikels.add(item);
@@ -373,5 +426,45 @@ public class Lager implements CRUDoperations<Artikel> {
         }
     }
 
+
+
+    public void changeSize(Lager mylager) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Current allowed quantity is: " + amount);
+        System.out.println("Do you want to change the allowed quantity? (yes/no)");
+        String choice = scanner.nextLine();
+
+        if (choice.equalsIgnoreCase("yes")) {
+            System.out.println("Enter the new allowed quantity: ");
+            int newAmount = scanner.nextInt();
+
+            // حساب عدد العناصر التي تمت إضافتها حديثًا
+            int addedItems = artikels.size();
+
+            while (newAmount < (amount + addedItems)) {
+                System.out.println("Error: The new allowed quantity is less than the current number of articles plus the added items.");
+                System.out.println("Enter a valid new allowed quantity: ");
+                newAmount = scanner.nextInt();
+            }
+
+            amount = newAmount;
+            System.out.println("The allowed quantity is changed to: " + newAmount);
+        } else {
+            System.out.println("The allowed quantity remains unchanged.");
+        }
+    }
+
+    public void setSize(int newSize) {
+
+        if (newSize < artikels.size()) {
+            System.out.println("Error: The new size should be greater than or equal to the current number of elements.");
+        } else {
+            while (artikels.size() < newSize) {
+                artikels.add(null);
+            }
+            System.out.println("Lager size changed to " + newSize);
+        }
+    }
 
 }

@@ -52,27 +52,10 @@ public class Bestand {
     public void setAmount(int amount) {
         this.amount = amount;
     }
-    public void mengeChange() {
-        Scanner scanner = new Scanner(System.in);
+    public  void mengeChange() {
 
-        System.out.println("Current allowed quantity is: " + amount);
-        System.out.println("Do you want to change the allowed quantity? (yes/no)");
-        String choice = scanner.nextLine();
-
-        if (choice.equalsIgnoreCase("yes")) {
-            System.out.println("Enter the new allowed quantity: ");
-            int newAmount = scanner.nextInt();
-
-            if (newAmount >= artikels.size()) {
-                amount = newAmount;
-                System.out.println("The allowed quantity is changed to: " + newAmount);
-            } else {
-                System.out.println("Error: The new allowed quantity is less than the current number of articles.");
-            }
-        } else {
-            System.out.println("The allowed quantity remains unchanged.");
-        }
     }
+
 
     public static void sellArtikel(Lager mainLager) {
         Kunde.orderBestand(mainLager);
