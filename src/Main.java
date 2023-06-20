@@ -43,12 +43,13 @@ public class Main {
                     case 2:
                         System.out.println("insert artikel number:");
                         String artikelNumber = input.next();
-                        input.nextLine();
 
                         System.out.println("insert a description:");
+                        input.nextLine(); // استهلاك السطر الجديد الذي تم إدخاله بعد رقم الصنف
                         String artikelDescription = input.nextLine();
+
                         Artikel newArtikel = new Artikel(artikelNumber, artikelDescription);
-                        Lager.addArtikel(newArtikel,lager);
+                        Lager.addArtikel(newArtikel, lager);
                         System.out.println("----------***-----------");
                         break;
                     case 3:
