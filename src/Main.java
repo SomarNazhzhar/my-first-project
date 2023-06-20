@@ -45,7 +45,7 @@ public class Main {
                         String artikelNumber = input.next();
 
                         System.out.println("insert a description:");
-                        input.nextLine(); // استهلاك السطر الجديد الذي تم إدخاله بعد رقم الصنف
+                        input.nextLine();
                         String artikelDescription = input.nextLine();
 
                         Artikel newArtikel = new Artikel(artikelNumber, artikelDescription);
