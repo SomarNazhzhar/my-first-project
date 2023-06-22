@@ -31,6 +31,7 @@ public class Main {
                 System.out.println("9.  Read file and print on the Console");
                 System.out.println("10. creat xml file");
                 System.out.println("11. read File and insert data");
+                System.out.println("12. Update");
 
                 input = new Scanner(System.in);
                 choice = input.nextInt();
@@ -143,6 +144,57 @@ public class Main {
                             e.printStackTrace();
                         }
                         break;
+
+                    case 12:
+                        int S2 = 0;
+                        do {
+                            System.out.println("++++++++++ Update Management ++++++++++ ");
+                            System.out.println("1- Update Artikels");
+                            System.out.println("2- Update Lieferant");
+                            System.out.println("3- Update Kunde");
+                            System.out.println("4- Print lieferanten und kunde");
+                            System.out.println("5- Back to main menu");
+                            System.out.print(">>>");
+                            S2 = input.nextInt();
+
+                            switch (S2) {
+                                case 1:
+                                    Artikel item = new Artikel();
+                                    lager.update(item);
+                                    break;
+
+                                case 2:
+                                    System.out.println("insert previous Lieferant name :");
+                                    String l_name = input.next();
+                                    Lieferant lieferant = Lieferant.findLieferantByName(l_name);
+                                    if (lieferant != null) {
+                                        lieferant.update(lieferant);
+                                    }else {
+                                        System.out.println("lieferant not found !!");
+                                    }
+                                    break;
+
+                                case 3:
+                                    System.out.println("Enter previous customer name:");
+                                    String previousName = input.next();
+
+                                    Kunde customer = Kunde.findCustomerByName(previousName);
+                                    if (customer != null) {
+                                       customer.update(customer);
+                                    } else {
+                                        System.out.println("Customer not found!");
+                                    }
+                                    break;
+
+                                case 4:
+                                    Kunde.printCustomers();
+                                    Lieferant.printLieferanten();
+
+                            }
+                        } while (S2 != 5);
+
+
+
                 }
 
             } catch (Exception e) {

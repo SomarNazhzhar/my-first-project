@@ -1,12 +1,17 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Kunde implements CRUDoperations<Kunde>{
     private String kunde_id;
     private String kunde_name;
+    private static ArrayList <Kunde> customers = new ArrayList<>();
 
     public Kunde(String kunde_id, String kunde_name) {
         this.kunde_id = kunde_id;
         this.kunde_name = kunde_name;
+    }
+    public Kunde(){
+
     }
 
     public String getKunde_id() {
@@ -33,10 +38,10 @@ public class Kunde implements CRUDoperations<Kunde>{
 
         System.out.println("Enter customer number:");
         String customerNumber = input.nextLine();
-
         System.out.println("Artikels List");
         mainLager.printBestand();
-
+        Kunde kunde = new Kunde(customerNumber,customerName);
+        customers.add(kunde);
         System.out.println("choose Artikel Number");
         String artikelNumber = input.next();
         input.nextLine();
@@ -80,12 +85,6 @@ public class Kunde implements CRUDoperations<Kunde>{
 
 
 
-
-
-
-
-
-
     @Override
     public void create(Kunde item) {
 
@@ -96,9 +95,42 @@ public class Kunde implements CRUDoperations<Kunde>{
         return null;
     }
 
+    public static void printCustomers() {
+        System.out.println("Customers:");
+        for (Kunde customer : customers) {
+            System.out.println(customer.getKunde_name());
+        }
+        System.out.println("------------------------");
+    }
+    public static void updateKunde(Kunde customer) {
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("Enter new customer name:");
+        String newName = input.nextLine();
+
+        System.out.println("Enter new customer number:");
+        String newNumber = input.nextLine();
+
+        customer.setKunde_name(newName);
+        customer.setKunde_id(newNumber);
+        System.out.println("Customer updated successfully.");
+        System.out.println("New customer name: " + customer.getKunde_name());
+        System.out.println("New customer number: " + customer.getKunde_id());
+
+    }
+    public static Kunde findCustomerByName(String name) {
+        for (Kunde customer : customers) {
+            if (customer.getKunde_name().equals(name)) {
+                return customer;
+            }
+        }
+        return null;
+    }
+
+
     @Override
     public void update(Kunde item) {
-
+    updateKunde(item);
     }
 
     @Override

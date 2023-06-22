@@ -404,14 +404,22 @@ public class Lager implements CRUDoperations<Artikel> {
 
     @Override
     public void update(Artikel item) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("insert artikel number: ");
+        String a_nmuber =scanner.nextLine();
+
+        System.out.println("insert the new Artikel number: ");
+        String a_nmuber_new =scanner.nextLine();
+
+        System.out.println("insert the new description : ");
+        String a_desc =scanner.nextLine();
+
         for (int i = 0; i < artikels.size(); i++) {
             Artikel existingItem = artikels.get(i);
-            if (existingItem.getArtikelNumber().equals(item.getArtikelNumber())) {
-                artikels.set(i, item);
-                System.out.println("updated");
-                break;
+            if (existingItem.getArtikelNumber().equals(a_nmuber)) {
+                artikels.set(i, new Artikel(a_nmuber_new,a_desc));
             }
-        }
+        } System.out.println("** updated successfully **");
     }
 
     @Override
